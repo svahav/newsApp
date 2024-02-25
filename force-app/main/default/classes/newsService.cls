@@ -1,6 +1,5 @@
 public with sharing class NewsService {
-    @AuraEnabled(cacheable=true)
-    public static Map<String, Object> retrieveNews() {
+    private static Map<String, Object> retrieveNews() {
         HttpRequest httpRequest = new HttpRequest();
         httpRequest.setEndpoint('https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=7b6f8c2f8884438dbb74fcc05b489aad');
         httpRequest.setMethod('GET');
