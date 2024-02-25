@@ -1,6 +1,7 @@
 public with sharing class NewsController {
     @AuraEnabled(cacheable=true)
-    public static Map<String, Object> getNewsData() {
-        return NewsService.retrieveNews();
+    public static Map<String, Object> getNewsDataFromService() {
+        NewsService newsService = new NewsService();
+        return newsService.getNewsData();
     }
 }
