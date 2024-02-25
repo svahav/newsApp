@@ -1,3 +1,16 @@
 <template>
-    <h1>LWC News Room</h1>
+    <div class="container">
+        <div class="slds-grid slds-gutters slds-wrap justify-center">
+            <template for:each={result} for:item="item">
+                <div class="card" key={item.id}>
+                    <img class="card-image" src={item.urlToImage}>
+                    <div class="card-text">
+                        <span class="date">{item.publishedAt}</span>
+                        <h2>{item.title}</h2>
+                    </div>
+                    <div class="card-stats">Read More</div>
+                </div>
+            </template>
+        </div>
+    </div>
 </template>
