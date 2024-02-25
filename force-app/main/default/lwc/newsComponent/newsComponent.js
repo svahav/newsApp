@@ -1,12 +1,12 @@
 import { LightningElement } from 'lwc';
-import getNewsData from '@salesforce/apex/NewsController.getNewsData' ;
+import getNewsDataFromService from '@salesforce/apex/NewsController.getNewsDataFromService' ;
 export default class NewsComponent extends LightningElement {
     
     connectedCallback(){
         this.fetchNews();
     }
     fetchNews(){
-        getNewsData().then(response=>{
+        getNewsDataFromService().then(response=>{
             console.log(response);
         }).catch(error=>{
             cpnsole.error(error);
