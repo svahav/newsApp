@@ -1,4 +1,4 @@
-public with sharing class NewsController {
+public with sharing class newsController {
     @AuraEnabled(cacheable=true)
     public static Map<String, Object> getNewsDataFromService() {
         NewsService newsService = new NewsService();

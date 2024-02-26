@@ -17,8 +17,10 @@ export default class NewsComponent extends LightningElement {
         this.result = res.map((item, index)=>{
             let id = `new_${index+1}`;
             let name = item.source.name;
-            return {...item, id:id, name:name}
+            let urlToImage = item.urlToImage;
+            return {...item, id:id, name:name, urlToImage:urlToImage}
         })
+        console.log(result);
         
     }
 }
