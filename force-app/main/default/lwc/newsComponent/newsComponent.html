@@ -3,7 +3,7 @@
         <div class="slds-grid slds-gutters slds-wrap justify-center">
             <template for:each={result} for:item="item">
                 <div class="card" key={item.id}>
-                    <img class="card-image" src={item.urlToImage}>
+                    <img class="card-image" src={item.urlToImage} alt={item.title} >
                     <div class="card-text">
                         <span class="date">{item.publishedAt}</span>
                         <h2>{item.title}</h2>
