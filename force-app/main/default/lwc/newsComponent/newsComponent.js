@@ -8,47 +8,27 @@ export default class NewsComponent extends LightningElement {
         this.fetchNews();
     }
 
-    async fetchNews() {
-        try {
-            const response = await getNewsDataFromService();
-            console.log('Raw response:', response);
-            if (response && response.articles) {
+    fetchNews() {
+        getNewsDataFromService()
+            .then(response => {
+                console.log(response);
                 this.formatNewsData(response.articles);
-            } else {
-                throw new Error('Invalid response format');
-            }
-        } catch (error) {
-            console.error('Error fetching news:', error);
-        }
+            })
+            .catch(error => {
+                console.error(error);
+                debugger;
+            });
     }
 
-    async formatNewsData(articles) {
-        this.result = [];
-        for (let index = 0; index < articles.length; index++) {
-            const article = articles[index];
-            const id = `new_${index + 1}`;
-            const name = article.source?.name || 'Unknown Source';
-            const urlToImage = article.urlToImage || '';
-            try {
-                const blobUrl = await this.convertToBlob(urlToImage);
-                this.result.push({ ...article, id, name, urlToImage, blobUrl });
-            } catch (error) {
-                console.error('Error converting to blob:', error);
-                this.result.push({ ...article, id, name, urlToImage, blobUrl: '' });
-            }
-        }
+    formatNewsData(res) {
+        this.result = res.map((item, index) => {
+            let id = `new_${index + 1}`;
+            let name = item.source.name;
+            let urlToImage = item.urlToImage !== null ? item.urlToImage : ''; // Check if urlToImage is not null
+         
+            return { ...item, id, name };
+        });
         console.log('Formatted Result:', this.result);
     }
 
-    async convertToBlob(urlToImage) {
-        if (!urlToImage) return ''; // Return empty string if URL is not provided
-        try {
-            const response = await fetch(urlToImage);
-            const blob = await response.blob();
-            return URL.createObjectURL(blob);
-        } catch (error) {
-            console.error('Error converting to blob:', error);
-            throw error; // Rethrow error for the caller to handle
-        }
-    }
 }

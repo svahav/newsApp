@@ -1,5 +1,5 @@
 public with sharing class NewsService {
-    public Map<String, Object> getNewsData() {
+    private static Map<String, Object> getNewsData() {
         HttpRequest httpRequest = new HttpRequest();
         httpRequest.setEndpoint('https://newsapi.org/v2/everything?q=apple&from=2024-02-25&to=2024-02-25&sortBy=popularity&apiKey=7b6f8c2f8884438dbb74fcc05b489aad');
         httpRequest.setMethod('GET');
@@ -39,5 +39,8 @@ public with sharing class NewsService {
         }
 
         return newsJsonData;
+    }
+    public Map<String, Object> fetchNewsData(){
+        return getNewsData();
     }
 }
