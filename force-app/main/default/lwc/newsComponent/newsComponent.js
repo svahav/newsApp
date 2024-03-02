@@ -1,34 +1,46 @@
 import { LightningElement, track } from 'lwc';
 import getNewsDataFromService from '@salesforce/apex/NewsController.getNewsDataFromService';
-
 export default class NewsComponent extends LightningElement {
-    @track result = [];
-
-    connectedCallback() {
+    @track result = []
+    @track selectedNews={};
+    @track isModalOpen = false;
+    
+    get modalClass(){
+        return `slds-modal ${this.isModalOpen ? "slds-fade-in-open" :""}`
+    }
+    get modalBackdropClass(){
+        return this.isModalOpen ? "slds-backdrop slds-backdrop_open" : "slds-backdrop"
+    }
+    connectedCallback(){
         this.fetchNews();
     }
-
-    fetchNews() {
-        getNewsDataFromService()
-            .then(response => {
-                console.log(response);
-                this.formatNewsData(response.articles);
-            })
-            .catch(error => {
-                console.error(error);
-                debugger;
-            });
+    fetchNews(){
+        getNewsDataFromService().then(response=>{
+            console.log(response);
+            this.formatNewsData(response.articles)
+        }).catch(error=>{
+            console.error(error);
+        })
     }
-
-    formatNewsData(res) {
-        this.result = res.map((item, index) => {
-            let id = `new_${index + 1}`;
+    formatNewsData(res){
+        this.result = res.map((item, index)=>{
+            let id = `new_${index+1}`;
+            let date = new Date(item.publishedAt).toDateString()
             let name = item.source.name;
-            let urlToImage = item.urlToImage !== null ? item.urlToImage : ''; // Check if urlToImage is not null
-         
-            return { ...item, id, name };
-        });
-        console.log('Formatted Result:', this.result);
-    }
+            return { ...item, id: id, name: name, date: date}
+        })
 
+    }
+    showModal(event){
+        let id = event.target.dataset.item;
+        this.result.forEach(item=>{
+            if(item.id === id){
+                this.selectedNews ={...item}
+            }
+        })
+        this.isModalOpen = true;
+    }
+    closeModal(){
+        this.isModalOpen = false;
+    }
 }

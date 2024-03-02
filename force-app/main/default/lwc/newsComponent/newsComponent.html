@@ -1,16 +1,24 @@
 <template>
-    <div class="container">
-        <div class="slds-grid slds-gutters slds-wrap justify-center">
-            <template for:each={result} for:item="item">
-                <div class="card" key={item.id}>
-                    <img class="card-image" src={item.urlToImage} alt={item.title} >
-                    <div class="card-text">
-                        <span class="date">{item.publishedAt}</span>
-                        <h2>{item.title}</h2>
-                    </div>
-                    <div class="card-stats">Read More</div>
-                </div>
-            </template>
+  <div class="container">
+    <div class="slds-grid slds-gutters slds-wrap justify-center">
+      <template for:each={result} for:item="item">
+        <div class="card" key={item.id}>
+          <img class="card-image" src={item.urlToImage} />
+          <div class="card-text">
+            <span class="date">{item.date}</span>
+            <h2>{item.title}</h2>
+          </div>
+          <div class="card-stats" onclick={showModal} data-item={item.id}>
+            Read More
+          </div>
         </div>
+      </template>
     </div>
+  </div>
+  <template if:true={isModalOpen}>
+    <c-news-modal
+      selected-news={selectedNews}
+      onclosemodal={closeModal}
+    ></c-news-modal>
+  </template>
 </template>
