@@ -22,4 +22,4 @@ To use this component in your Salesforce org:
 1. Clone this repository:
 
 ```bash
-git clone <https://github.com/svahav/newsApp.git>
+git clone https://github.com/svahav/newsApp.git
