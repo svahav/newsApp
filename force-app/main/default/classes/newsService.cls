@@ -16,8 +16,6 @@ public with sharing class NewsService {
                 strResponse = httpResponse.getBody();
                 if (!String.isBlank(strResponse)) {
                     newsJsonData = (Map<String, Object>) JSON.deserializeUntyped(strResponse);
-
-                    // Check if the 'articles' key exists and if it does, loop through each article
                     if (newsJsonData.containsKey('articles')) {
                         List<Object> articles = (List<Object>) newsJsonData.get('articles');
                         for (Object articleObj : articles) {
@@ -33,7 +31,7 @@ public with sharing class NewsService {
                 throw new CalloutException('HTTP Error: ' + httpResponse.getStatusCode() + ' ' + httpResponse.getStatus());
             }
         } catch (CalloutException ex) {
-            throw ex; // Rethrow the CalloutException
+            throw ex; 
         } catch (Exception ex) {
             throw new CalloutException('An unexpected error occurred: ' + ex.getMessage()); // Handle other exceptions
         }
