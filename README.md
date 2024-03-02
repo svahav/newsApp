@@ -1,18 +1,25 @@
-# Salesforce DX Project: Next Steps
+# News Component
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+This is a Lightning Web Component that displays news articles fetched from a service and allows users to view detailed information about each article in a modal.
 
-## How Do You Plan to Deploy Your Changes?
+## Features
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+- Fetches news articles from an external service.
+- Displays news articles as cards.
+- Allows users to view detailed information about each article in a modal.
+- Modal closes when the user clicks the close button or anywhere outside the modal.
 
-## Configure Your Salesforce DX Project
+## Usage
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+To use this component in your Salesforce org:
 
-## Read All About It
+1. Ensure that you have access to Salesforce Lightning Experience.
+2. Deploy the component to your Salesforce org.
+3. Include the component in a Lightning App Builder page or Lightning Experience record page.
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+## Setup
+
+1. Clone this repository:
+
+```bash
+git clone <repository-url>
